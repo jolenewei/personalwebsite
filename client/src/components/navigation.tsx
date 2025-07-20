@@ -2,16 +2,23 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+type NavItem = {
+  href: string;
+  label: string;
+  external?: boolean;
+}
+
 const Navigation = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
 
   const navItems = [
-    { href: "#home", label: "Home" },
-    { href: "#about", label: "About" },
-    { href: "#skills", label: "Skills" },
-    { href: "#projects", label: "Projects" },
-    { href: "#contact", label: "Contact" },
+    { href: "#home", label: "home" },
+    { href: "#about", label: "about" },
+    { href: "#skills", label: "skills" },
+    { href: "#projects", label: "projects" },
+    { href: "#contact", label: "contact" },
+    { href: "https://www.linkedin.com/in/jolene-wei", label: "linkedin", external: true },
   ];
 
   const scrollToSection = (sectionId: string) => {
@@ -55,12 +62,23 @@ const Navigation = () => {
             onClick={() => scrollToSection('#home')} 
             className="text-xl font-bold cursor-pointer"
           >
-            AJ
+            jolene wei
           </button>
           
           {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-8">
-            {navItems.map((item) => (
+            {navItems.map((item) => 
+              item.external ? (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="nav-link"
+                >
+                  {item.label}
+                </a>
+              ) : (
               <button
                 key={item.href}
                 onClick={() => scrollToSection(item.href)}
@@ -85,7 +103,18 @@ const Navigation = () => {
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
           <div className="md:hidden mt-4 space-y-2">
-            {navItems.map((item) => (
+            {navItems.map((item) => 
+            item.external ? (
+              <a
+                key={item.href}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block py-2 nav-link w-full text-left"
+              >
+                {item.label}
+              </a>
+            ) : (
               <button
                 key={item.href}
                 onClick={() => scrollToSection(item.href)}

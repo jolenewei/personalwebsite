@@ -6,7 +6,7 @@ const Projects = () => {
   const projects = [
     {
       icon: Globe,
-      title: "Task Management App",
+      title: "tetris game",
       description: "A full-stack productivity application built with React and Node.js featuring real-time collaboration and intuitive task organization.",
       tags: ["React", "Node.js", "MongoDB"],
       demoLink: "#",
@@ -14,7 +14,7 @@ const Projects = () => {
     },
     {
       icon: Cloud,
-      title: "Weather Dashboard",
+      title: "typing test",
       description: "A responsive weather application with beautiful visualizations and location-based forecasts using modern web APIs.",
       tags: ["JavaScript", "CSS3", "API"],
       demoLink: "#",
@@ -58,9 +58,9 @@ const Projects = () => {
     <section id="projects" className="py-20 min-h-screen pt-28">
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">My Projects</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">my projects</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            A showcase of my recent work and the technologies I love working with
+            check out what i'm currently working on and what i've built in the past!
           </p>
         </div>
 

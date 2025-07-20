@@ -26,7 +26,7 @@ const Contact = () => {
     // Basic validation
     if (!formData.name || !formData.email || !formData.message) {
       toast({
-        title: "Please fill in all fields",
+        title: "please fill in all fields",
         variant: "destructive",
       });
       return;
@@ -34,8 +34,8 @@ const Contact = () => {
 
     // Simulate form submission
     toast({
-      title: "Message sent successfully!",
-      description: "Thank you for your message. I'll get back to you soon.",
+      title: "message sent successfully!",
+      description: "thank you for your message. i'll get back to you soon.",
     });
 
     // Reset form
@@ -45,15 +45,15 @@ const Contact = () => {
   const contactInfo = [
     {
       icon: Mail,
-      label: "alex.johnson@email.com",
+      label: "jwei57@ucsc.edu",
     },
     {
-      icon: Phone,
-      label: "+1 (555) 123-4567",
+      icon: Phone, // change this to github icon later
+      label: "github.com/jolenewei",
     },
     {
       icon: MapPin,
-      label: "San Francisco, CA",
+      label: "san jose, ca",
     },
   ];
 
@@ -61,17 +61,17 @@ const Contact = () => {
     {
       icon: Github,
       href: "#",
-      label: "GitHub",
+      label: "github",
     },
     {
       icon: Linkedin,
       href: "#",
-      label: "LinkedIn",
+      label: "linkedin",
     },
     {
       icon: Twitter,
       href: "#",
-      label: "Twitter",
+      label: "twitter",
     },
   ];
 
@@ -79,15 +79,15 @@ const Contact = () => {
     <section id="contact" className="py-20 bg-muted min-h-screen pt-28">
       <div className="max-w-4xl mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Get In Touch</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">get in touch</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            I'm always interested in new opportunities and collaborations. Let's connect!
+            i'm always interested in new opportunities and collaborations. let's connect!
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-12">
           <div>
-            <h3 className="text-xl font-semibold mb-6">Contact Information</h3>
+            <h3 className="text-xl font-semibold mb-6">contact information</h3>
             <div className="space-y-4">
               {contactInfo.map((item, index) => {
                 const Icon = item.icon;
@@ -101,7 +101,7 @@ const Contact = () => {
             </div>
 
             <div className="mt-8">
-              <h4 className="font-semibold mb-4">Connect With Me</h4>
+              <h4 className="font-semibold mb-4">socials</h4>
               <div className="flex space-x-4">
                 {socialLinks.map((social, index) => {
                   const Icon = social.icon;
@@ -124,19 +124,19 @@ const Contact = () => {
             <CardContent className="p-6">
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                  <Label htmlFor="name">Name</Label>
+                  <Label htmlFor="name">name</Label>
                   <Input
                     type="text"
                     id="name"
                     name="name"
                     value={formData.name}
                     onChange={handleInputChange}
-                    placeholder="Your Name"
+                    placeholder="your name"
                     className="mt-2"
                   />
                 </div>
                 <div>
-                  <Label htmlFor="email">Email</Label>
+                  <Label htmlFor="email">email</Label>
                   <Input
                     type="email"
                     id="email"
@@ -148,19 +148,19 @@ const Contact = () => {
                   />
                 </div>
                 <div>
-                  <Label htmlFor="message">Message</Label>
+                  <Label htmlFor="message">message</Label>
                   <Textarea
                     id="message"
                     name="message"
                     value={formData.message}
                     onChange={handleInputChange}
                     rows={4}
-                    placeholder="Your message..."
+                    placeholder="your message..."
                     className="mt-2"
                   />
                 </div>
                 <Button type="submit" className="w-full">
-                  Send Message
+                  send message
                 </Button>
               </form>
             </CardContent>
