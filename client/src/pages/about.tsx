@@ -1,27 +1,9 @@
-import { Code, Server, Beaker } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
+import { Monitor } from "lucide-react";
 
 const About = () => {
-  const skills = [
-    {
-      icon: Code,
-      title: "Frontend Development",
-      description: "React, JavaScript, HTML/CSS, Tailwind",
-    },
-    {
-      icon: Server,
-      title: "Backend Development",
-      description: "Node.js, Python, PostgreSQL, Express",
-    },
-    {
-      icon: Beaker,
-      title: "Problem Solving",
-      description: "Algorithms, Data Structures, System Design",
-    },
-  ];
 
   return (
-    <section className="py-20 bg-muted min-h-screen pt-28">
+    <section id="about" className="py-20 bg-muted min-h-screen pt-28">
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">About Me</h2>
@@ -46,22 +28,6 @@ const About = () => {
               When I'm not coding, you'll find me exploring new technologies, contributing to open source projects, or enjoying a good cup of coffee while planning my next big project.
             </p>
           </div>
-        </div>
-
-        {/* Skills Grid */}
-        <div className="grid md:grid-cols-3 gap-8">
-          {skills.map((skill, index) => {
-            const Icon = skill.icon;
-            return (
-              <Card key={index} className="text-center">
-                <CardContent className="p-6">
-                  <Icon className="w-12 h-12 mx-auto mb-4" strokeWidth={1.5} />
-                  <h4 className="font-semibold mb-2">{skill.title}</h4>
-                  <p className="text-muted-foreground text-sm">{skill.description}</p>
-                </CardContent>
-              </Card>
-            );
-          })}
         </div>
       </div>
     </section>

@@ -1,47 +1,73 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "wouter";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Navigation = () => {
-  const [location] = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
 
   const navItems = [
-    { href: "/", label: "Home" },
-    { href: "/about", label: "About" },
-    { href: "/projects", label: "Projects" },
-    { href: "/contact", label: "Contact" },
+    { href: "#home", label: "Home" },
+    { href: "#about", label: "About" },
+    { href: "#skills", label: "Skills" },
+    { href: "#projects", label: "Projects" },
+    { href: "#contact", label: "Contact" },
   ];
 
-  const isActive = (href: string) => {
-    if (href === "/" && location === "/") return true;
-    if (href !== "/" && location === href) return true;
-    return false;
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId.replace('#', ''));
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+    setMobileMenuOpen(false);
   };
 
   useEffect(() => {
-    setMobileMenuOpen(false);
-  }, [location]);
+    const handleScroll = () => {
+      const sections = navItems.map(item => item.href.replace('#', ''));
+      const scrollPosition = window.scrollY + 100;
+
+      for (const sectionId of sections) {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          const { offsetTop, offsetHeight } = element;
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActiveSection(sectionId);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const isActive = (href: string) => {
+    return activeSection === href.replace('#', '');
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 bg-background border-b border-border z-50">
       <div className="max-w-6xl mx-auto px-6 py-4">
         <div className="flex justify-between items-center">
-          <Link href="/" className="text-xl font-bold">
+          <button 
+            onClick={() => scrollToSection('#home')} 
+            className="text-xl font-bold cursor-pointer"
+          >
             AJ
-          </Link>
+          </button>
           
           {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-8">
             {navItems.map((item) => (
-              <Link
+              <button
                 key={item.href}
-                href={item.href}
+                onClick={() => scrollToSection(item.href)}
                 className={`nav-link ${isActive(item.href) ? "active" : ""}`}
               >
                 {item.label}
-              </Link>
+              </button>
             ))}
           </div>
 
@@ -60,13 +86,13 @@ const Navigation = () => {
         {mobileMenuOpen && (
           <div className="md:hidden mt-4 space-y-2">
             {navItems.map((item) => (
-              <Link
+              <button
                 key={item.href}
-                href={item.href}
-                className={`block py-2 nav-link ${isActive(item.href) ? "active" : ""}`}
+                onClick={() => scrollToSection(item.href)}
+                className={`block py-2 nav-link ${isActive(item.href) ? "active" : ""} w-full text-left`}
               >
                 {item.label}
-              </Link>
+              </button>
             ))}
           </div>
         )}
