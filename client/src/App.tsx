@@ -10,28 +10,22 @@ import Skills from "@/pages/skills";
 import Projects from "@/pages/projects";
 import Contact from "@/pages/contact";
 
-function Router() {
-  return (
-    <div className="min-h-screen flex flex-col">
-      <Navigation />
-      <main className="flex-1">
-        <Home />
-        <About />
-        <Skills />
-        <Projects />
-        <Contact />
-      </main>
-      <Footer />
-    </div>
-  );
-}
-
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
-        <Router />
+        <div className="min-h-screen flex flex-col relative bg-black">
+          <Navigation />
+          <main className="flex-1 relative z-10">
+            <Home />
+            <About />
+            <Projects />
+            <Skills />
+            <Contact />
+          </main>
+          <Footer />
+        </div>
       </TooltipProvider>
     </QueryClientProvider>
   );

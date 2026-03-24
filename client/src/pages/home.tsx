@@ -1,31 +1,91 @@
+import { useState, useEffect } from "react";
+import { Search, MousePointer2, ImageIcon, Github, Linkedin, Mail } from "lucide-react";
+
 const Home = () => {
+  const [typed, setTyped] = useState("");
+  const fullText = "my portfolio";
+
+  useEffect(() => {
+    let i = 0;
+    const interval = setInterval(() => {
+      if (i <= fullText.length) {
+        setTyped(fullText.slice(0, i));
+        i++;
+      } else {
+        clearInterval(interval);
+      }
+    }, 100);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center px-6 pt-20">
-      <div className="max-w-4xl mx-auto text-center">
-        <div className="mb-8">
-          <img 
-            src="../../assets/laptop.png" 
-            alt="Laptop icon" 
-            className="mx-auto w-28 md:w-36" 
-          />
+    <section id="home" className="min-h-screen relative pt-20">
+      {/* Hero area */}
+      <div className="relative">
+        {/* Full-width hero image placeholder */}
+        <div className="w-full h-[55vh] md:h-[70vh] bg-neutral-950 relative overflow-hidden">
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="text-center">
+              <ImageIcon className="w-16 h-16 mx-auto mb-3 opacity-10" />
+              <p className="text-sm opacity-10">horizontal hero photo</p>
+            </div>
+          </div>
+
+          {/* Content overlay */}
+          <div className="absolute inset-0 flex flex-col justify-between p-6 md:p-12 z-10">
+            {/* Top row - search bar */}
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2 bg-black/50 backdrop-blur-md border border-white/10 rounded-full px-4 py-2 w-fit">
+                <Search className="w-3.5 h-3.5 text-muted-foreground" />
+                <span className="text-sm cursor-blink">{typed}</span>
+              </div>
+              {/* Cursor icon */}
+              <MousePointer2 className="w-5 h-5 text-white/30 hidden md:block" />
+            </div>
+
+            {/* Bottom - name + description side by side */}
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+              <div>
+                <h1 className="text-5xl md:text-8xl font-extrabold leading-[0.85] tracking-tight text-white drop-shadow-2xl">
+                  jolene wei
+                </h1>
+                <p className="text-white/50 text-sm md:text-base mt-3 max-w-sm">
+                  computer science student at uc santa cruz — i love building
+                  things that make a difference. always open to new opportunities.
+                </p>
+              </div>
+
+              {/* Social links */}
+              <div className="flex gap-2 shrink-0">
+                <a href="https://github.com/jolenewei" target="_blank" rel="noopener noreferrer"
+                  className="w-9 h-9 rounded-full bg-black/40 backdrop-blur-sm border border-white/15 flex items-center justify-center hover:bg-white hover:text-black transition-all">
+                  <Github className="w-4 h-4" />
+                </a>
+                <a href="https://www.linkedin.com/in/jolene-wei" target="_blank" rel="noopener noreferrer"
+                  className="w-9 h-9 rounded-full bg-black/40 backdrop-blur-sm border border-white/15 flex items-center justify-center hover:bg-white hover:text-black transition-all">
+                  <Linkedin className="w-4 h-4" />
+                </a>
+                <a href="mailto:jwei57@ucsc.edu"
+                  className="w-9 h-9 rounded-full bg-black/40 backdrop-blur-sm border border-white/15 flex items-center justify-center hover:bg-white hover:text-black transition-all">
+                  <Mail className="w-4 h-4" />
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
-        <h1 className="text-4xl md:text-6xl font-bold mb-4">hi, i'm jolene!</h1>
-        <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-          i'm currently a computer science student at uc santa cruz and i'm passionate about creating projects that make a difference. i'm always open to new opportunities and collaborations, so feel free to reach out!
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <button 
-            onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-            className="bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-3 rounded-md transition-colors"
-          >
-            check out my projects
-          </button>
-          <button 
-            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-            className="border border-border bg-background hover:bg-muted px-6 py-3 rounded-md transition-colors"
-          >
-            get in touch
-          </button>
+
+        {/* Photo strip */}
+        <div className="grid grid-cols-4 md:grid-cols-6 border-t border-white/10">
+          {[1, 2, 3, 4, 5, 6].map((i) => (
+            <div
+              key={i}
+              className={`h-[100px] md:h-[140px] bg-neutral-950 flex items-center justify-center border-r border-white/10 last:border-r-0 ${
+                i > 4 ? "hidden md:flex" : ""
+              }`}
+            >
+              <ImageIcon className="w-4 h-4 opacity-10" />
+            </div>
+          ))}
         </div>
       </div>
     </section>

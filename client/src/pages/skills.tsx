@@ -1,74 +1,76 @@
 import { Code, Database, Palette, Layers, Globe, Cpu } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 
 const Skills = () => {
   const skillCategories = [
     {
       icon: Code,
-      title: "Frontend Development",
-      skills: ["React", "TypeScript", "JavaScript", "HTML5", "CSS3", "Tailwind CSS", "Next.js", "Vue.js"]
+      title: "frontend",
+      skills: ["React", "TypeScript", "JavaScript", "HTML5", "CSS3", "Tailwind CSS", "Next.js", "Vue.js"],
     },
     {
       icon: Database,
-      title: "Backend Development", 
-      skills: ["Node.js", "Express.js", "Python", "Flask", "PostgreSQL", "MongoDB", "REST APIs", "GraphQL"]
+      title: "backend",
+      skills: ["Node.js", "Express.js", "Python", "Flask", "PostgreSQL", "MongoDB", "REST APIs", "GraphQL"],
     },
     {
       icon: Layers,
-      title: "Tools & Technologies",
-      skills: ["Git", "Docker", "AWS", "Linux", "VS Code", "Figma", "Postman", "NPM"]
+      title: "tools",
+      skills: ["Git", "Docker", "AWS", "Linux", "VS Code", "Figma", "Postman", "NPM"],
     },
     {
       icon: Palette,
-      title: "Design & UI/UX",
-      skills: ["Responsive Design", "Material UI", "Bootstrap", "Wireframing", "Prototyping", "User Research"]
+      title: "design",
+      skills: ["Responsive Design", "Material UI", "Bootstrap", "Wireframing", "Prototyping", "User Research"],
     },
     {
       icon: Globe,
-      title: "Web Technologies",
-      skills: ["Progressive Web Apps", "WebSockets", "OAuth", "JWT", "CORS", "HTTP/HTTPS", "DNS"]
+      title: "web tech",
+      skills: ["Progressive Web Apps", "WebSockets", "OAuth", "JWT", "CORS", "HTTP/HTTPS"],
     },
     {
       icon: Cpu,
-      title: "Programming Concepts",
-      skills: ["Data Structures", "Algorithms", "OOP", "Design Patterns", "Testing", "Debugging", "Version Control"]
-    }
+      title: "concepts",
+      skills: ["Data Structures", "Algorithms", "OOP", "Design Patterns", "Testing", "Version Control"],
+    },
   ];
 
   return (
-    <section id="skills" className="py-20 bg-muted min-h-screen">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">skills & technologies</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            technologies, frameworks, and tools i am familiar with
-          </p>
-        </div>
+    <section id="skills" className="px-6 py-20 md:py-32 relative">
+      <div className="absolute top-32 right-10 w-[1px] h-16 bg-gradient-to-b from-transparent via-white/10 to-transparent hidden md:block" />
+      <div className="absolute bottom-20 right-8 md:right-16 text-[10px] text-white/[0.04] font-mono rotate-90 hidden md:block">
+        SKILLS — 03
+      </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="max-w-5xl mx-auto">
+        <p className="font-mono text-xs text-muted-foreground tracking-widest uppercase mb-8 fade-up">
+          03 / skills
+        </p>
+
+        <h2 className="text-4xl md:text-6xl font-extrabold mb-12 leading-tight fade-up">
+          tools &<span className="text-muted-foreground/40"> technologies</span>
+        </h2>
+
+        <div className="space-y-6 fade-up fade-up-delay-1">
           {skillCategories.map((category, index) => {
             const Icon = category.icon;
             return (
-              <Card key={index} className="bg-background hover:shadow-lg transition-shadow duration-300">
-                <CardContent className="p-6">
-                  <div className="flex items-center mb-4">
-                    <Icon className="w-6 h-6 mr-3 text-primary" strokeWidth={2} />
-                    <h3 className="font-semibold text-lg">{category.title}</h3>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {category.skills.map((skill, skillIndex) => (
-                      <Badge 
-                        key={skillIndex} 
-                        variant="secondary" 
-                        className="text-xs py-1 px-2 bg-primary/10 text-primary hover:bg-primary/20 transition-colors"
-                      >
-                        {skill}
-                      </Badge>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
+              <div key={index}>
+                <div className="flex items-center gap-2.5 mb-2.5">
+                  <Icon className="w-3.5 h-3.5 text-muted-foreground" />
+                  <h3 className="text-sm font-bold">{category.title}</h3>
+                  <div className="flex-1 h-px bg-border/30 ml-1" />
+                </div>
+                <div className="flex flex-wrap gap-1.5 pl-6">
+                  {category.skills.map((skill, skillIndex) => (
+                    <span
+                      key={skillIndex}
+                      className="px-3 py-1 rounded-full text-xs border border-white/12 text-muted-foreground hover:bg-white hover:text-black hover:border-white transition-all cursor-default"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
             );
           })}
         </div>
