@@ -47,7 +47,7 @@ const FloatingComputer = () => {
         }}
       >
         <img
-          src="../../assets/computer.png"
+          src="/assets/computer.png"
           alt="3D MacBook"
           className="w-full h-full object-contain"
           style={{

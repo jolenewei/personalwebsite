@@ -92,7 +92,7 @@ const About = () => {
             <div className="relative">
               <div className="w-[300px] rotate-[6deg] origin-top-left">
                 <img
-                  src="../../assets/photobooth.png"
+                  src="/assets/photobooth.png"
                   alt="photobooth with friends"
                   className="w-full h-auto rounded-sm drop-shadow-2xl"
                 />
@@ -131,7 +131,7 @@ const About = () => {
           <div className="hidden md:block absolute -left-10 top-4 z-20">
             <div className="relative inline-block rotate-[-6deg]">
               <div className="w-[160px] rounded-2xl overflow-hidden">
-                <img src="../../assets/matcha.png" alt="matcha" className="w-full h-auto" />
+                <img src="/assets/matcha.png" alt="matcha" className="w-full h-auto" />
               </div>
               <svg
                 className="absolute -bottom-1 left-[-70px]"
@@ -155,7 +155,7 @@ const About = () => {
           <div className="hidden md:block absolute -left-32 top-[110px] z-10">
             <div className="relative inline-block rotate-[4deg]">
               <div className="w-[190px] rounded-lg overflow-hidden drop-shadow-2xl">
-                <img src="../../assets/camera-friends.png" alt="friends" className="w-full h-auto" />
+                <img src="/assets/camera-friends.png" alt="friends" className="w-full h-auto" />
               </div>
             </div>
           </div>
