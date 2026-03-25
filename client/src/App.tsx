@@ -6,6 +6,7 @@ import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
 import Home from "@/pages/home";
 import About from "@/pages/about";
+import Experience from "@/pages/experience";
 import Skills from "@/pages/skills";
 import Projects from "@/pages/projects";
 import Contact from "@/pages/contact";
@@ -23,6 +24,8 @@ function App() {
             <About />
             <div className="w-full h-[1.5px] bg-white/15" />
             <Projects />
+            <div className="w-full h-[1.5px] bg-white/15" />
+            <Experience />
             <div className="w-full h-[1.5px] bg-white/15" />
             <Skills />
             <div className="w-full h-[1.5px] bg-white/15" />

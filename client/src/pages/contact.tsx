@@ -11,14 +11,31 @@ const Contact = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [sending, setSending] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) {
       toast({ title: "please fill in all fields", variant: "destructive" });
       return;
     }
-    toast({ title: "message sent!", description: "i'll get back to you soon." });
-    setFormData({ name: "", email: "", message: "" });
+    setSending(true);
+    try {
+      const res = await fetch("https://formspree.io/f/mnnzvngn", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      if (res.ok) {
+        toast({ title: "message sent!", description: "i'll get back to you soon." });
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        toast({ title: "something went wrong", description: "please try again.", variant: "destructive" });
+      }
+    } catch {
+      toast({ title: "something went wrong", description: "please try again.", variant: "destructive" });
+    }
+    setSending(false);
   };
 
   const contactLinks = [
@@ -31,12 +48,12 @@ const Contact = () => {
   return (
     <section id="contact" className="px-6 py-20 md:py-32 relative">
       <div className="absolute top-28 left-8 md:left-16 text-[10px] text-white/[0.04] font-mono -rotate-90 hidden md:block">
-        CONTACT — 04
+        CONTACT — 05
       </div>
 
       <div className="max-w-5xl mx-auto">
         <p className="font-mono text-xs text-muted-foreground tracking-widest uppercase mb-8 fade-up">
-          04 / contact
+          05 / contact
         </p>
 
         <h2 className="text-4xl md:text-6xl font-extrabold mb-16 leading-tight fade-up">
@@ -81,11 +98,11 @@ const Contact = () => {
             })}
           </div>
 
-          <div className="white-section p-6 md:p-8 fade-up fade-up-delay-2">
-            <h3 className="font-semibold text-neutral-800 mb-6">send me a message</h3>
+          <div className="glass-card p-6 md:p-8 rounded-2xl fade-up fade-up-delay-2 md:-mt-8">
+            <h3 className="font-semibold text-white mb-6">send me a message</h3>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label htmlFor="name" className="text-xs text-neutral-400 mb-1.5 block uppercase tracking-wider font-medium">
+                <label htmlFor="name" className="text-xs text-muted-foreground mb-1.5 block uppercase tracking-wider font-medium">
                   name
                 </label>
                 <input
@@ -95,11 +112,11 @@ const Contact = () => {
                   value={formData.name}
                   onChange={handleInputChange}
                   placeholder="your name"
-                  className="w-full bg-neutral-100 border-none rounded-xl px-4 py-2.5 text-sm text-neutral-800 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-black/10 transition-all"
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-white/25 transition-all"
                 />
               </div>
               <div>
-                <label htmlFor="email" className="text-xs text-neutral-400 mb-1.5 block uppercase tracking-wider font-medium">
+                <label htmlFor="email" className="text-xs text-muted-foreground mb-1.5 block uppercase tracking-wider font-medium">
                   email
                 </label>
                 <input
@@ -109,11 +126,11 @@ const Contact = () => {
                   value={formData.email}
                   onChange={handleInputChange}
                   placeholder="your@email.com"
-                  className="w-full bg-neutral-100 border-none rounded-xl px-4 py-2.5 text-sm text-neutral-800 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-black/10 transition-all"
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-white/25 transition-all"
                 />
               </div>
               <div>
-                <label htmlFor="message" className="text-xs text-neutral-400 mb-1.5 block uppercase tracking-wider font-medium">
+                <label htmlFor="message" className="text-xs text-muted-foreground mb-1.5 block uppercase tracking-wider font-medium">
                   message
                 </label>
                 <textarea
@@ -123,14 +140,15 @@ const Contact = () => {
                   onChange={handleInputChange}
                   rows={4}
                   placeholder="your message..."
-                  className="w-full bg-neutral-100 border-none rounded-xl px-4 py-2.5 text-sm text-neutral-800 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-black/10 transition-all resize-none"
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-white/25 transition-all resize-none"
                 />
               </div>
               <button
                 type="submit"
-                className="w-full bg-black text-white py-2.5 rounded-xl text-sm font-medium hover:bg-neutral-800 transition-colors flex items-center justify-center gap-2"
+                disabled={sending}
+                className="w-full bg-white/10 border border-white/15 text-white py-2.5 rounded-xl text-sm font-medium hover:bg-white hover:text-black transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                send message <Send className="w-3.5 h-3.5" />
+                {sending ? "sending..." : "send message"} {!sending && <Send className="w-3.5 h-3.5" />}
               </button>
             </form>
           </div>

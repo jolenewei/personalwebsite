@@ -1,11 +1,11 @@
 import { useState, useRef } from "react";
-import { Trophy, Camera, Music, Palette, Tv, Coffee, ChevronLeft, ChevronRight, Play, ImageIcon } from "lucide-react";
+import { Trophy, Camera, Music, Palette, Tv, Coffee, ChevronLeft, ChevronRight, Play, Guitar } from "lucide-react";
 import VinylPlayer from "@/components/vinyl-player";
 
 const About = () => {
   const hobbies = [
-    { icon: Music, name: "listening to music" },
     { icon: Palette, name: "design" },
+    { icon: Guitar, name: "playing guitar" },
     { icon: Camera, name: "making vlogs" },
     { icon: Tv, name: "watching shows" },
     { icon: Coffee, name: "exploring new cafes" },
@@ -13,15 +13,14 @@ const About = () => {
   ];
 
   const vlogs = [
-    { title: "vlog title", description: "a short description of this vlog" },
-    { title: "vlog title", description: "a short description of this vlog" },
-    { title: "vlog title", description: "a short description of this vlog" },
-    { title: "vlog title", description: "a short description of this vlog" },
-    { title: "vlog title", description: "a short description of this vlog" },
+    { title: "3/22/2026", description: "santa cruz day trip", videoId: "B8po3Dg_SFw" },
+    { title: "2/26 – 3/01/2026", description: "friend birthday weekend", videoId: "9yHF7p1eyWM" },
+    { title: "4/18 – 4/23/2025", description: "hawaii", videoId: "yuyL1xrT4HI" },
   ];
 
   const vlogRef = useRef<HTMLDivElement>(null);
   const [activeVlog, setActiveVlog] = useState(0);
+  const [playingVlogs, setPlayingVlogs] = useState<boolean[]>(vlogs.map(() => false));
 
   const scrollVlogs = (dir: "left" | "right") => {
     const newIndex = dir === "left"
@@ -65,17 +64,17 @@ const About = () => {
       <Music className="absolute bottom-[30%] left-[8%] w-4 h-4 text-white/[0.06] -rotate-[20deg] hidden md:block" />
 
       <div className="max-w-5xl mx-auto">
-        <p className="font-mono text-xs text-muted-foreground tracking-widest uppercase mb-8 fade-up">
+        <p className="font-mono text-xs text-muted-foreground tracking-widest uppercase mb-8 fade-up md:-ml-16">
           01 / about
         </p>
 
-        <h2 className="text-4xl md:text-6xl font-extrabold mb-12 leading-tight fade-up">
+        <h2 className="text-4xl md:text-6xl font-extrabold mb-12 leading-tight fade-up md:-ml-16">
           a little about
           <span className="text-muted-foreground/40"> me</span>
         </h2>
 
         {/* Main content with photobooth image */}
-        <div className="relative mb-16">
+        <div className="relative mb-20">
           <div className="max-w-xl fade-up fade-up-delay-1">
             <p className="text-muted-foreground leading-relaxed mb-6 text-base">
               i'm a passionate computer science student who loves to work on new projects and
@@ -106,7 +105,7 @@ const About = () => {
         </div>
 
         {/* Hobbies - full width */}
-        <div className="mb-6 fade-up fade-up-delay-2">
+        <div className="mb-10 fade-up fade-up-delay-2">
           <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-6">
             hobbies & interests
           </p>
@@ -126,29 +125,38 @@ const About = () => {
           </div>
         </div>
 
-        {/* Matcha + Vlogs layered area */}
-        <div className="relative mb-20 fade-up fade-up-delay-3">
+        {/* Matcha + Camera + Vlogs layered area */}
+        <div className="relative mb-24 fade-up fade-up-delay-3">
           {/* Matcha photo - hidden on mobile */}
-          <div className="hidden md:block absolute -left-14 top-4 z-10">
+          <div className="hidden md:block absolute -left-10 top-4 z-20">
             <div className="relative inline-block rotate-[-6deg]">
-              <div className="w-[220px] rounded-2xl overflow-hidden">
+              <div className="w-[160px] rounded-2xl overflow-hidden">
                 <img src="../../assets/matcha.png" alt="matcha" className="w-full h-auto" />
               </div>
               <svg
-                className="absolute -bottom-8 left-2"
-                width="140"
+                className="absolute -bottom-1 left-[-70px]"
+                width="120"
                 height="45"
-                viewBox="0 0 140 45"
+                viewBox="0 0 120 45"
               >
                 <defs>
-                  <path id="matcha-curve" d="M 5 10 Q 70 45 135 10" fill="none" />
+                  <path id="matcha-curve" d="M 5 30 Q 60 0 115 30" fill="none" />
                 </defs>
-                <text fill="rgba(255,255,255,0.35)" fontSize="11" fontStyle="italic" fontWeight="300" fontFamily="'Outfit', sans-serif">
+                <text fill="rgba(255,255,255,0.35)" fontSize="10" fontStyle="italic" fontWeight="300" fontFamily="'Outfit', sans-serif">
                   <textPath href="#matcha-curve">
-                    i love matcha !
+                    matcha matcha matcha!!
                   </textPath>
                 </text>
               </svg>
+            </div>
+          </div>
+
+          {/* Camera friends photo - overlapping below-left of matcha */}
+          <div className="hidden md:block absolute -left-32 top-[110px] z-10">
+            <div className="relative inline-block rotate-[4deg]">
+              <div className="w-[190px] rounded-lg overflow-hidden drop-shadow-2xl">
+                <img src="../../assets/camera-friends.png" alt="friends" className="w-full h-auto" />
+              </div>
             </div>
           </div>
 
@@ -181,30 +189,63 @@ const About = () => {
               className="flex gap-3 overflow-x-auto pb-4"
               style={{ scrollbarWidth: "none", scrollSnapType: "x mandatory" }}
             >
-              {vlogs.map((vlog, i) => (
-                <div
-                  key={i}
-                  className={`shrink-0 glass-card overflow-hidden group transition-all duration-400 ${
-                    i === activeVlog
-                      ? "w-[220px] md:w-[260px] opacity-100 scale-100"
-                      : "w-[180px] md:w-[210px] opacity-50 scale-[0.92]"
-                  }`}
-                  style={{ scrollSnapAlign: "center" }}
-                >
-                  <div className={`${i === activeVlog ? "h-[130px] md:h-[150px]" : "h-[100px] md:h-[120px]"} bg-gradient-to-br from-neutral-800/60 to-neutral-900/60 flex items-center justify-center relative transition-all duration-400`}>
-                    <ImageIcon className="w-6 h-6 opacity-15" />
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                      <div className="w-9 h-9 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                        <Play className="w-4 h-4 ml-0.5" />
-                      </div>
+              {vlogs.map((vlog, i) => {
+                const isActive = i === activeVlog;
+                return (
+                  <div
+                    key={i}
+                    className={`shrink-0 glass-card overflow-hidden group transition-all duration-400 ${
+                      isActive
+                        ? "w-[220px] md:w-[260px] opacity-100 scale-100"
+                        : "w-[180px] md:w-[210px] opacity-50 scale-[0.92]"
+                    }`}
+                    style={{ scrollSnapAlign: "center" }}
+                  >
+                    <div className={`${isActive ? "h-[130px] md:h-[150px]" : "h-[100px] md:h-[120px]"} relative overflow-hidden transition-all duration-400`}>
+                      {playingVlogs[i] ? (
+                        <iframe
+                          src={`https://www.youtube.com/embed/${vlog.videoId}?autoplay=1&mute=1&rel=0`}
+                          className="absolute inset-0 w-full h-full"
+                          allow="autoplay; encrypted-media"
+                          allowFullScreen
+                          title={vlog.description}
+                        />
+                      ) : (
+                        <>
+                          <img
+                            src={`https://img.youtube.com/vi/${vlog.videoId}/hqdefault.jpg`}
+                            alt={vlog.description}
+                            className="w-full h-full object-cover"
+                          />
+                          <button
+                            onClick={() => {
+                              const updated = [...playingVlogs];
+                              updated[i] = true;
+                              setPlayingVlogs(updated);
+                            }}
+                            className="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                          >
+                            <div className="w-9 h-9 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                              <Play className="w-4 h-4 ml-0.5 text-white" fill="white" />
+                            </div>
+                          </button>
+                        </>
+                      )}
+                    </div>
+                    <div className="p-3">
+                      <p className="text-xs font-semibold truncate">{vlog.title}</p>
+                      <p className="text-[10px] text-muted-foreground truncate mt-0.5">{vlog.description}</p>
                     </div>
                   </div>
-                  <div className="p-3">
-                    <p className="text-xs font-semibold truncate">{vlog.title}</p>
-                    <p className="text-[10px] text-muted-foreground truncate mt-0.5">{vlog.description}</p>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
+              {/* More to come */}
+              <div
+                className="shrink-0 glass-card overflow-hidden flex items-center justify-center w-[140px] md:w-[160px] opacity-50"
+                style={{ scrollSnapAlign: "center" }}
+              >
+                <p className="text-xs text-muted-foreground text-center px-4">more to come!!</p>
+              </div>
             </div>
 
             {/* Dots */}
@@ -220,6 +261,8 @@ const About = () => {
             </div>
           </div>
         </div>
+
+        <div className="-mx-6 md:-mx-[calc((100vw-64rem)/2+1.5rem)] h-[1.5px] bg-white/15 mb-20" style={{ width: "100vw", marginLeft: "calc(-50vw + 50%)" }} />
 
         {/* Music section with vinyl */}
         <div className="fade-up fade-up-delay-3">

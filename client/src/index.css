@@ -37,6 +37,15 @@
     font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
     overflow-x: hidden;
     background: #000;
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+
+  @media (max-width: 767px) {
+    section {
+      padding-left: 2rem !important;
+      padding-right: 2rem !important;
+    }
   }
 
   html {
@@ -285,3 +294,36 @@
 .fade-up-delay-1 { animation-delay: 0.1s; }
 .fade-up-delay-2 { animation-delay: 0.2s; }
 .fade-up-delay-3 { animation-delay: 0.3s; }
+
+/* Pop-up float animation for home page bubbles */
+@keyframes popupFloat {
+  0% { opacity: 0; transform: translateY(12px) scale(0.95); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.popup-float {
+  animation: popupFloat 0.6s ease-out both;
+}
+
+/* Code text floating upward from computer */
+@keyframes codeFloat {
+  0% { opacity: 0; transform: translateY(10px); }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-30px); }
+}
+
+.code-float {
+  animation: codeFloat 6s ease-in-out infinite;
+}
+
+/* Spinning computer animation */
+@keyframes spinY {
+  0% { transform: perspective(400px) rotateY(0deg); }
+  100% { transform: perspective(400px) rotateY(360deg); }
+}
+
+.spinning-computer {
+  animation: spinY 8s linear infinite;
+  transform-style: preserve-3d;
+}

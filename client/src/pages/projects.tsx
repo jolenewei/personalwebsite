@@ -1,54 +1,123 @@
 import { useState, useRef, useEffect } from "react";
-import { ExternalLink, Github, ChevronLeft, ChevronRight, ImageIcon } from "lucide-react";
+import { ExternalLink, Github, ChevronLeft, ChevronRight, Play } from "lucide-react";
+
+const projects = [
+  {
+    title: "chameleon",
+    description: "Chrome extension that rewrites emails in Gmail using OpenAI with customizable tone and one-click replacement.",
+    tags: ["Chrome APIs", "OpenAI API", "JavaScript", "Vite"],
+    videoId: "-hqQRXeTL1s",
+    githubLink: "#",
+  },
+  {
+    title: "typing test",
+    description: "Full-stack typing test with real-time WPM and accuracy tracking, Google login, and saved performance history.",
+    tags: ["React", "Express", "MongoDB", "Firebase Auth", "Chart.js"],
+    videoId: "i20esF_XM9M",
+    githubLink: "#",
+  },
+  {
+    title: "tetris game",
+    description: "Playable Tetris clone with piece movement, rotation, line clearing, and live scoring.",
+    tags: ["React", "JavaScript", "CSS"],
+    videoId: "BfaDWTFXMZw",
+    githubLink: "#",
+  },
+  {
+    title: "compass goals",
+    description: "Goal-setting web app for students with quarterly goal creation, hashtag recommendations, and weekly tracking.",
+    tags: ["Angular", "Firebase", "TypeScript"],
+    videoId: "TKna7SfswVg",
+    githubLink: "#",
+  },
+];
+
+const ProjectCard = ({ project, index, isActive }: { project: typeof projects[0]; index: number; isActive: boolean }) => {
+  const [playing, setPlaying] = useState(false);
+  const thumbnail = `https://img.youtube.com/vi/${project.videoId}/hqdefault.jpg`;
+
+  return (
+    <div
+      className={`project-card w-[340px] md:w-[420px] glass-card overflow-hidden ${
+        isActive ? "active" : ""
+      }`}
+    >
+      {/* Video / Thumbnail area */}
+      <div className="bg-neutral-900 h-[180px] md:h-[220px] relative overflow-hidden">
+        {playing ? (
+          <iframe
+            src={`https://www.youtube.com/embed/${project.videoId}?autoplay=1&mute=1&rel=0`}
+            className="absolute inset-0 w-full h-full"
+            allow="autoplay; encrypted-media"
+            allowFullScreen
+            title={project.title}
+          />
+        ) : (
+          <>
+            <img
+              src={thumbnail}
+              alt={project.title}
+              className="w-full h-full object-cover"
+            />
+            {/* Play button overlay */}
+            <button
+              onClick={() => setPlaying(true)}
+              className="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/40 transition-all group"
+            >
+              <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:bg-white/30 group-hover:scale-110 transition-all">
+                <Play className="w-5 h-5 ml-0.5 text-white" fill="white" />
+              </div>
+            </button>
+          </>
+        )}
+
+        <span className="font-mono text-5xl font-bold opacity-[0.06] absolute top-3 right-4 pointer-events-none">
+          {String(index + 1).padStart(2, "0")}
+        </span>
+
+        {/* Action buttons */}
+        <div className="absolute bottom-3 right-3 flex gap-2 z-10">
+          <a
+            href={`https://www.youtube.com/watch?v=${project.videoId}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-2 bg-black/50 backdrop-blur-sm rounded-full hover:bg-white hover:text-black transition-all"
+          >
+            <ExternalLink className="w-3.5 h-3.5" />
+          </a>
+          <a
+            href={project.githubLink}
+            className="p-2 bg-black/50 backdrop-blur-sm rounded-full hover:bg-white hover:text-black transition-all"
+          >
+            <Github className="w-3.5 h-3.5" />
+          </a>
+        </div>
+      </div>
+
+      {/* Info */}
+      <div className="p-5">
+        <h3 className="text-lg font-bold mb-2">{project.title}</h3>
+        <p className="text-muted-foreground text-xs leading-relaxed mb-4">
+          {project.description}
+        </p>
+        <div className="flex flex-wrap gap-1.5">
+          {project.tags.map((tag, tagIndex) => (
+            <span
+              key={tagIndex}
+              className="pill-btn text-[10px] px-3 py-1"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const Projects = () => {
   const carouselRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
-
-  const projects = [
-    {
-      title: "tetris game",
-      description: "A full-stack productivity application built with React and Node.js featuring real-time collaboration and intuitive task organization.",
-      tags: ["React", "Node.js", "MongoDB"],
-      demoLink: "#",
-      githubLink: "#",
-    },
-    {
-      title: "typing test",
-      description: "A responsive application with beautiful visualizations and real-time feedback using modern web APIs.",
-      tags: ["JavaScript", "CSS3", "API"],
-      demoLink: "#",
-      githubLink: "#",
-    },
-    {
-      title: "e-commerce platform",
-      description: "A secure online shopping platform with payment integration, inventory management, and admin dashboard.",
-      tags: ["Vue.js", "Python", "PostgreSQL"],
-      demoLink: "#",
-      githubLink: "#",
-    },
-    {
-      title: "code editor extension",
-      description: "A VS Code extension with smart code suggestions and automated documentation generation.",
-      tags: ["TypeScript", "VS Code API", "Node.js"],
-      demoLink: "#",
-      githubLink: "#",
-    },
-    {
-      title: "fitness tracker",
-      description: "A mobile-first fitness tracking application with workout logging, progress visualization, and social features.",
-      tags: ["React Native", "Firebase", "Redux"],
-      demoLink: "#",
-      githubLink: "#",
-    },
-    {
-      title: "data viz tool",
-      description: "An interactive data visualization platform for analyzing and presenting complex datasets.",
-      tags: ["D3.js", "Python", "Flask"],
-      demoLink: "#",
-      githubLink: "#",
-    },
-  ];
 
   const scrollToIndex = (index: number) => {
     if (!carouselRef.current) return;
@@ -92,7 +161,6 @@ const Projects = () => {
   };
 
   useEffect(() => {
-    // Center first card on mount
     scrollToIndex(0);
   }, []);
 
@@ -100,18 +168,21 @@ const Projects = () => {
     <section id="projects" className="py-20 md:py-32 relative">
       {/* Decorative */}
       <div className="absolute top-24 left-8 md:left-16 text-[10px] text-white/[0.04] font-mono -rotate-90 hidden md:block">
-        WORK — 02
+        PROJECTS — 02
       </div>
 
       <div className="max-w-5xl mx-auto px-6">
         <p className="font-mono text-xs text-muted-foreground tracking-widest uppercase mb-8 fade-up">
-          02 / work
+          02 / projects
         </p>
 
         <div className="flex items-end justify-between mb-10 fade-up">
-          <h2 className="text-4xl md:text-6xl font-extrabold leading-tight">
-            my<span className="text-muted-foreground/40"> work</span>
-          </h2>
+          <div>
+            <h2 className="text-4xl md:text-6xl font-extrabold leading-tight">
+              my<span className="text-muted-foreground/40"> projects</span>
+            </h2>
+            <p className="text-sm text-muted-foreground mt-3">what i've worked on</p>
+          </div>
 
           <div className="flex gap-3">
             <button
@@ -137,58 +208,12 @@ const Projects = () => {
         className="project-carousel flex gap-5 px-[calc(50vw-180px)] md:px-[calc(50vw-220px)] pb-4 fade-up fade-up-delay-1"
       >
         {projects.map((project, index) => (
-          <div
+          <ProjectCard
             key={index}
-            className={`project-card w-[340px] md:w-[420px] glass-card overflow-hidden ${
-              index === activeIndex ? "active" : ""
-            }`}
-          >
-            {/* Image area */}
-            <div className="bg-gradient-to-br from-neutral-800/60 to-neutral-900/60 h-[180px] md:h-[220px] flex items-center justify-center relative overflow-hidden">
-              <div className="text-center">
-                <ImageIcon className="w-10 h-10 mx-auto mb-2 opacity-15" />
-                <p className="text-xs opacity-15">screenshot</p>
-              </div>
-
-              <span className="font-mono text-5xl font-bold opacity-[0.06] absolute top-3 right-4">
-                {String(index + 1).padStart(2, "0")}
-              </span>
-
-              {/* Action buttons */}
-              <div className="absolute bottom-3 right-3 flex gap-2">
-                <a
-                  href={project.demoLink}
-                  className="p-2 bg-black/50 backdrop-blur-sm rounded-full hover:bg-white hover:text-black transition-all"
-                >
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </a>
-                <a
-                  href={project.githubLink}
-                  className="p-2 bg-black/50 backdrop-blur-sm rounded-full hover:bg-white hover:text-black transition-all"
-                >
-                  <Github className="w-3.5 h-3.5" />
-                </a>
-              </div>
-            </div>
-
-            {/* Info */}
-            <div className="p-5">
-              <h3 className="text-lg font-bold mb-2">{project.title}</h3>
-              <p className="text-muted-foreground text-xs leading-relaxed mb-4">
-                {project.description}
-              </p>
-              <div className="flex flex-wrap gap-1.5">
-                {project.tags.map((tag, tagIndex) => (
-                  <span
-                    key={tagIndex}
-                    className="pill-btn text-[10px] px-3 py-1"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
+            project={project}
+            index={index}
+            isActive={index === activeIndex}
+          />
         ))}
       </div>
 

@@ -1,36 +1,26 @@
-import { Code, Database, Palette, Layers, Globe, Cpu } from "lucide-react";
+import { Code, Database, Layers, Cpu } from "lucide-react";
 
 const Skills = () => {
   const skillCategories = [
     {
       icon: Code,
-      title: "frontend",
-      skills: ["React", "TypeScript", "JavaScript", "HTML5", "CSS3", "Tailwind CSS", "Next.js", "Vue.js"],
+      title: "languages",
+      skills: ["Python", "C++", "C", "Java", "JavaScript", "TypeScript", "SQL"],
     },
     {
       icon: Database,
-      title: "backend",
-      skills: ["Node.js", "Express.js", "Python", "Flask", "PostgreSQL", "MongoDB", "REST APIs", "GraphQL"],
+      title: "frameworks & libraries",
+      skills: ["React", "Angular", "Node.js", "Express", "MongoDB", "Firebase"],
     },
     {
       icon: Layers,
       title: "tools",
-      skills: ["Git", "Docker", "AWS", "Linux", "VS Code", "Figma", "Postman", "NPM"],
-    },
-    {
-      icon: Palette,
-      title: "design",
-      skills: ["Responsive Design", "Material UI", "Bootstrap", "Wireframing", "Prototyping", "User Research"],
-    },
-    {
-      icon: Globe,
-      title: "web tech",
-      skills: ["Progressive Web Apps", "WebSockets", "OAuth", "JWT", "CORS", "HTTP/HTTPS"],
+      skills: ["Git", "GitHub", "Docker", "Docker Compose", "PostgreSQL", "Chrome Extension APIs", "Unix/Linux"],
     },
     {
       icon: Cpu,
-      title: "concepts",
-      skills: ["Data Structures", "Algorithms", "OOP", "Design Patterns", "Testing", "Version Control"],
+      title: "ml / other",
+      skills: ["OpenAI API", "scikit-learn", "NumPy"],
     },
   ];
 
@@ -38,12 +28,12 @@ const Skills = () => {
     <section id="skills" className="px-6 py-20 md:py-32 relative">
       <div className="absolute top-32 right-10 w-[1px] h-16 bg-gradient-to-b from-transparent via-white/10 to-transparent hidden md:block" />
       <div className="absolute bottom-20 right-8 md:right-16 text-[10px] text-white/[0.04] font-mono rotate-90 hidden md:block">
-        SKILLS — 03
+        SKILLS — 04
       </div>
 
       <div className="max-w-5xl mx-auto">
         <p className="font-mono text-xs text-muted-foreground tracking-widest uppercase mb-8 fade-up">
-          03 / skills
+          04 / skills
         </p>
 
         <h2 className="text-4xl md:text-6xl font-extrabold mb-12 leading-tight fade-up">

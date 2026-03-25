@@ -5,6 +5,7 @@ const navItems = [
   { hash: "home", label: "home" },
   { hash: "about", label: "about" },
   { hash: "projects", label: "projects" },
+  { hash: "experience", label: "experience" },
   { hash: "skills", label: "skills" },
   { hash: "contact", label: "contact" },
 ];
@@ -37,7 +38,7 @@ const Navigation = () => {
   }, []);
 
   return (
-    <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-50">
+    <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-50 md:left-1/2 md:-translate-x-1/2 max-md:left-auto max-md:translate-x-0 max-md:right-4">
       {/* Desktop */}
       <div className="hidden md:block">
         <div className="white-section px-2 py-2 flex items-center gap-1 shadow-2xl shadow-black/30">
@@ -55,15 +56,12 @@ const Navigation = () => {
 
       {/* Mobile */}
       <div className="md:hidden">
-        <div className="white-section px-4 py-2.5 flex items-center gap-4 shadow-2xl shadow-black/30">
-          <span className="text-sm font-semibold text-neutral-800">jolene</span>
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="text-neutral-600"
-          >
-            {mobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
-          </button>
-        </div>
+        <button
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          className="p-2.5"
+        >
+          {mobileMenuOpen ? <X className="h-5 w-5 text-white" /> : <Menu className="h-5 w-5 text-white" />}
+        </button>
 
         {mobileMenuOpen && (
           <div className="white-section mt-2 px-2 py-2 shadow-2xl shadow-black/30">
