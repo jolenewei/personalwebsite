@@ -5,9 +5,9 @@ const experiences = [
     title: "UCSC Computer Science B.S.",
     org: "University of California, Santa Cruz",
     date: "2023 — 2027",
-    description: "Pursuing a computer science degree with a 3.95 GPA. Coursework includes data structures & algorithms, computer architecture, machine learning, and web development.",
+    description: "Pursuing a computer science degree. Coursework includes data structures & algorithms, computer architecture, machine learning, and web development.",
     icon: GraduationCap,
-    tags: ["Computer Science", "GPA: 3.95/4.0"],
+    tags: ["Computer Science"],
   },
   {
     title: "Frontend Web Developer",
@@ -62,15 +62,15 @@ const Experience = () => {
 
         {/* Timeline */}
         <div className="relative fade-up fade-up-delay-1">
-          <div className="space-y-12 md:space-y-16">
+          <div className="space-y-12 md:space-y-10">
             {experiences.map((exp, i) => {
               const Icon = exp.icon;
               const isEven = i % 2 === 0;
 
               return (
                 <div key={i} className="relative">
-                  <div className={`md:w-[calc(50%-30px)] ${isEven ? "md:mr-auto md:pr-0" : "md:ml-auto md:pl-0"}`}>
-                    <div className="glass-card p-6 rounded-2xl">
+                  <div className={`md:w-[calc(60%)] ${isEven ? "md:mr-auto md:pr-0" : "md:ml-auto md:pl-0"}`}>
+                    <div className="glass-card px-6 py-4 rounded-2xl">
                       <div className="flex items-start gap-4">
                         <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
                           <Icon className="w-4 h-4 text-muted-foreground" />

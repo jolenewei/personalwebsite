@@ -184,7 +184,7 @@ const Projects = () => {
             <p className="text-sm text-muted-foreground mt-3">what i've worked on</p>
           </div>
 
-          <div className="flex gap-3">
+          <div className="hidden md:flex gap-3">
             <button
               onClick={() => scroll("left")}
               className="w-10 h-10 rounded-full bg-white text-black flex items-center justify-center hover:bg-neutral-200 transition-all shadow-lg"
