@@ -19,7 +19,7 @@ const Home = () => {
   }, []);
 
   return (
-    <section id="home" className="min-h-screen relative pt-20">
+    <section id="home" className="relative pt-20">
       {/* Hero area */}
       <div className="relative">
         {/* Full-width hero image placeholder */}
@@ -39,8 +39,6 @@ const Home = () => {
                 <Search className="w-3.5 h-3.5 text-muted-foreground" />
                 <span className="text-sm cursor-blink">{typed}</span>
               </div>
-              {/* Cursor icon */}
-              <MousePointer2 className="w-5 h-5 text-white/30 hidden md:block" />
             </div>
 
             {/* Bottom - name + description side by side */}
@@ -49,25 +47,25 @@ const Home = () => {
                 <h1 className="text-5xl md:text-8xl font-extrabold leading-[0.85] tracking-tight text-white drop-shadow-2xl">
                   jolene wei
                 </h1>
-                <p className="text-white/50 text-sm md:text-base mt-3 max-w-sm">
+                <p className="text-white/50 text-sm md:text-base mt-3 max-w-sm md:ml-6">
                   computer science student at uc santa cruz — i love building
                   things that make a difference. always open to new opportunities.
                 </p>
               </div>
 
               {/* Social links */}
-              <div className="flex gap-2 shrink-0">
+              <div className="flex gap-3 shrink-0">
                 <a href="https://github.com/jolenewei" target="_blank" rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-full bg-black/40 backdrop-blur-sm border border-white/15 flex items-center justify-center hover:bg-white hover:text-black transition-all">
-                  <Github className="w-4 h-4" />
+                  className="flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-4 py-2 text-xs font-medium hover:bg-white hover:text-black transition-all">
+                  <Github className="w-3.5 h-3.5" /> github
                 </a>
                 <a href="https://www.linkedin.com/in/jolene-wei" target="_blank" rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-full bg-black/40 backdrop-blur-sm border border-white/15 flex items-center justify-center hover:bg-white hover:text-black transition-all">
-                  <Linkedin className="w-4 h-4" />
+                  className="flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-4 py-2 text-xs font-medium hover:bg-white hover:text-black transition-all">
+                  <Linkedin className="w-3.5 h-3.5" /> linkedin
                 </a>
                 <a href="mailto:jwei57@ucsc.edu"
-                  className="w-9 h-9 rounded-full bg-black/40 backdrop-blur-sm border border-white/15 flex items-center justify-center hover:bg-white hover:text-black transition-all">
-                  <Mail className="w-4 h-4" />
+                  className="flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-4 py-2 text-xs font-medium hover:bg-white hover:text-black transition-all">
+                  <Mail className="w-3.5 h-3.5" /> email
                 </a>
               </div>
             </div>
@@ -75,11 +73,11 @@ const Home = () => {
         </div>
 
         {/* Photo strip */}
-        <div className="grid grid-cols-4 md:grid-cols-6 border-t border-white/10">
+        <div className="grid grid-cols-4 md:grid-cols-6 border-t border-white/15">
           {[1, 2, 3, 4, 5, 6].map((i) => (
             <div
               key={i}
-              className={`h-[100px] md:h-[140px] bg-neutral-950 flex items-center justify-center border-r border-white/10 last:border-r-0 ${
+              className={`h-[100px] md:h-[140px] bg-neutral-950 flex items-center justify-center border-r border-white/15 last:border-r-0 ${
                 i > 4 ? "hidden md:flex" : ""
               }`}
             >

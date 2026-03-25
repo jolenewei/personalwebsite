@@ -52,7 +52,7 @@ const Contact = () => {
                   <div className="flex items-center gap-4">
                     <Icon className="w-5 h-5 text-muted-foreground" />
                     <div>
-                      <p className="text-xs text-muted-foreground font-mono uppercase tracking-wider">
+                      <p className="text-xs text-muted-foreground uppercase tracking-wider font-medium">
                         {link.label}
                       </p>
                       <p className="text-sm font-medium mt-0.5">{link.value}</p>
@@ -85,7 +85,7 @@ const Contact = () => {
             <h3 className="font-semibold text-neutral-800 mb-6">send me a message</h3>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label htmlFor="name" className="text-xs text-neutral-400 mb-1.5 block font-mono uppercase tracking-wider">
+                <label htmlFor="name" className="text-xs text-neutral-400 mb-1.5 block uppercase tracking-wider font-medium">
                   name
                 </label>
                 <input
@@ -99,7 +99,7 @@ const Contact = () => {
                 />
               </div>
               <div>
-                <label htmlFor="email" className="text-xs text-neutral-400 mb-1.5 block font-mono uppercase tracking-wider">
+                <label htmlFor="email" className="text-xs text-neutral-400 mb-1.5 block uppercase tracking-wider font-medium">
                   email
                 </label>
                 <input
@@ -113,7 +113,7 @@ const Contact = () => {
                 />
               </div>
               <div>
-                <label htmlFor="message" className="text-xs text-neutral-400 mb-1.5 block font-mono uppercase tracking-wider">
+                <label htmlFor="message" className="text-xs text-neutral-400 mb-1.5 block uppercase tracking-wider font-medium">
                   message
                 </label>
                 <textarea
