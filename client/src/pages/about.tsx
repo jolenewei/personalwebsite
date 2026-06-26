@@ -1,6 +1,163 @@
 import { useState, useRef } from "react";
-import { Trophy, Camera, Music, Palette, Tv, Coffee, ChevronLeft, ChevronRight, Play, Guitar } from "lucide-react";
-import VinylPlayer from "@/components/vinyl-player";
+import { Trophy, Camera, Music, Palette, Tv, Coffee, ChevronLeft, ChevronRight, Play, Guitar, Image as ImageIcon } from "lucide-react";
+
+const flyers = [
+  { src: "/assets/flyers/cranes-for-change.png", caption: "cranes for change" },
+  { src: "/assets/flyers/staff-spotlight.png", caption: "staff spotlight" },
+  { src: "/assets/flyers/womens-history-week.png", caption: "women's history week" },
+  { src: "/assets/flyers/vikenight.png", caption: "vikenight" },
+  { src: "/assets/flyers/hoco-football-game.png", caption: "hoco football game" },
+  { src: "/assets/flyers/valentine-boba-grams.png", caption: "valentine boba grams" },
+  { src: "/assets/flyers/color-a-smile.png", caption: "color a smile" },
+];
+
+const photos = [
+  { src: "/assets/photos/photo-01.jpg", caption: "", ratio: "1600 / 1066" },
+  { src: "/assets/photos/photo-02.jpg", caption: "", ratio: "1600 / 1195" },
+  { src: "/assets/photos/photo-03.jpg", caption: "", ratio: "1297 / 1600" },
+  { src: "/assets/photos/photo-04.jpg", caption: "", ratio: "1070 / 1600" },
+  { src: "/assets/photos/photo-05.jpg", caption: "", ratio: "1600 / 1065" },
+  { src: "/assets/photos/photo-06.jpg", caption: "", ratio: "1153 / 1600" },
+  { src: "/assets/photos/photo-07.jpg", caption: "", ratio: "1600 / 1062" },
+  { src: "/assets/photos/photo-08.jpg", caption: "", ratio: "1075 / 1600" },
+  { src: "/assets/photos/photo-09.jpg", caption: "", ratio: "1132 / 1600" },
+  { src: "/assets/photos/photo-10.jpg", caption: "", ratio: "1600 / 1190" },
+  { src: "/assets/photos/photo-11.jpg", caption: "", ratio: "1600 / 1192" },
+  { src: "/assets/photos/photo-12.jpg", caption: "", ratio: "1230 / 1600" },
+  { src: "/assets/photos/photo-13.jpg", caption: "", ratio: "1199 / 1600" },
+];
+
+const MediaCarousel = ({
+  label,
+  sublabel,
+  items,
+  ratio,
+  accent,
+}: {
+  label: string;
+  sublabel: string;
+  items: { src: string; caption: string; ratio?: string }[];
+  ratio: string;
+  accent: React.ReactNode;
+}) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState(0);
+
+  const scrollToIndex = (index: number) => {
+    if (!ref.current) return;
+    const cards = ref.current.children;
+    if (cards[index]) {
+      const card = cards[index] as HTMLElement;
+      const w = ref.current.offsetWidth;
+      const center = card.offsetLeft + card.offsetWidth / 2;
+      ref.current.scrollTo({ left: center - w / 2, behavior: "smooth" });
+    }
+  };
+
+  const scroll = (dir: "left" | "right") => {
+    const next = dir === "left" ? Math.max(0, active - 1) : Math.min(items.length - 1, active + 1);
+    setActive(next);
+    scrollToIndex(next);
+  };
+
+  const handleScroll = () => {
+    if (!ref.current) return;
+    const c = ref.current;
+    const center = c.scrollLeft + c.offsetWidth / 2;
+    let closest = 0;
+    let closestDist = Infinity;
+    Array.from(c.children).forEach((child, i) => {
+      const el = child as HTMLElement;
+      const dist = Math.abs(el.offsetLeft + el.offsetWidth / 2 - center);
+      if (dist < closestDist) { closestDist = dist; closest = i; }
+    });
+    setActive(closest);
+  };
+
+  return (
+    <div>
+      <div className="flex items-end justify-between mb-5">
+        <div className="flex items-center gap-2.5">
+          {accent}
+          <div>
+            <h3 className="text-xl md:text-2xl font-extrabold lowercase">{label}</h3>
+            <p className="text-[11px] text-muted-foreground mt-0.5">{sublabel}</p>
+          </div>
+        </div>
+        <div className="flex gap-2">
+          <button
+            onClick={() => scroll("left")}
+            className="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center hover:bg-neutral-200 transition-all shadow-lg"
+          >
+            <ChevronLeft className="w-4 h-4" />
+          </button>
+          <button
+            onClick={() => scroll("right")}
+            className="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center hover:bg-neutral-200 transition-all shadow-lg"
+          >
+            <ChevronRight className="w-4 h-4" />
+          </button>
+        </div>
+      </div>
+
+      <div
+        ref={ref}
+        onScroll={handleScroll}
+        className="relative flex items-center gap-3 overflow-x-auto pb-4"
+        style={{ scrollbarWidth: "none", scrollSnapType: "x mandatory" }}
+      >
+        {items.map((item, i) => {
+          const isActive = i === active;
+          return (
+            <div
+              key={i}
+              className={`shrink-0 glass-card overflow-hidden origin-center transition-[transform,opacity] duration-300 ${
+                isActive ? "opacity-100 scale-100" : "opacity-40 scale-[0.86]"
+              }`}
+              style={{ scrollSnapAlign: "center", width: "70%" }}
+            >
+              <div className="relative overflow-hidden bg-neutral-900" style={{ aspectRatio: item.ratio || ratio }}>
+                {/* Placeholder shown until a real image is dropped in */}
+                <div className="absolute inset-0 flex flex-col items-center justify-center gap-1.5 text-white/20">
+                  <ImageIcon className="w-6 h-6" />
+                  <span className="text-[9px] uppercase tracking-wider">coming soon</span>
+                </div>
+                <img
+                  src={item.src}
+                  alt={item.caption || label}
+                  loading="lazy"
+                  decoding="async"
+                  className="absolute inset-0 w-full h-full object-cover"
+                  onError={(e) => { e.currentTarget.style.display = "none"; }}
+                />
+                <span className="font-mono text-4xl font-bold opacity-[0.06] absolute top-2 right-3 pointer-events-none">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+              </div>
+              {item.caption && (
+                <div className="p-3">
+                  <p className="text-[10px] text-muted-foreground truncate">{item.caption}</p>
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      <div className="flex gap-1.5 mt-3">
+        {items.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => { setActive(i); scrollToIndex(i); }}
+            className={`h-1 rounded-full transition-all duration-300 ${
+              i === active ? "bg-white w-4" : "bg-white/20 w-1.5"
+            }`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
 
 const About = () => {
   const hobbies = [
@@ -13,6 +170,7 @@ const About = () => {
   ];
 
   const vlogs = [
+    { title: "year 2 recap", description: "at ucsc", videoId: "X8SsXw25Kig" },
     { title: "3/22/2026", description: "santa cruz day trip", videoId: "B8po3Dg_SFw" },
     { title: "2/26 – 3/01/2026", description: "friend birthday weekend", videoId: "9yHF7p1eyWM" },
     { title: "4/18 – 4/23/2025", description: "hawaii", videoId: "yuyL1xrT4HI" },
@@ -55,7 +213,7 @@ const About = () => {
     <section id="about" className="px-6 py-20 md:py-32 relative">
       {/* Decorative elements */}
       <div className="absolute top-32 right-8 md:right-16 text-[10px] text-white/[0.04] font-mono rotate-90 hidden md:block">
-        ABOUT — 01
+        ABOUT — 04
       </div>
       <div className="absolute bottom-40 left-6 w-[1px] h-20 bg-gradient-to-b from-transparent via-white/10 to-transparent hidden md:block" />
 
@@ -65,7 +223,7 @@ const About = () => {
 
       <div className="max-w-5xl mx-auto">
         <p className="font-mono text-xs text-muted-foreground tracking-widest uppercase mb-8 fade-up md:-ml-16">
-          01 / about
+          04 / about
         </p>
 
         <h2 className="text-4xl md:text-6xl font-extrabold mb-12 leading-tight fade-up md:-ml-16">
@@ -97,9 +255,6 @@ const About = () => {
                   className="w-full h-auto rounded-sm drop-shadow-2xl"
                 />
               </div>
-              <span className="absolute -bottom-10 right-2 text-xs text-white/30 rotate-[3deg]" style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300, fontStyle: "italic" }}>
-                i love hanging out with friends &lt;3
-              </span>
             </div>
           </div>
         </div>
@@ -133,21 +288,6 @@ const About = () => {
               <div className="w-[160px] rounded-2xl overflow-hidden">
                 <img src="/assets/matcha.png" alt="matcha" className="w-full h-auto" />
               </div>
-              <svg
-                className="absolute -bottom-1 left-[-70px]"
-                width="120"
-                height="45"
-                viewBox="0 0 120 45"
-              >
-                <defs>
-                  <path id="matcha-curve" d="M 5 30 Q 60 0 115 30" fill="none" />
-                </defs>
-                <text fill="rgba(255,255,255,0.35)" fontSize="10" fontStyle="italic" fontWeight="300" fontFamily="'Outfit', sans-serif">
-                  <textPath href="#matcha-curve">
-                    matcha matcha matcha!!
-                  </textPath>
-                </text>
-              </svg>
             </div>
           </div>
 
@@ -264,15 +404,36 @@ const About = () => {
 
         <div className="-mx-6 md:-mx-[calc((100vw-64rem)/2+1.5rem)] h-[1.5px] bg-white/15 mb-20" style={{ width: "100vw", marginLeft: "calc(-50vw + 50%)" }} />
 
-        {/* Music section with vinyl */}
+        {/* My other interests - flyers + photography */}
         <div className="fade-up fade-up-delay-3">
-          <div className="flex items-center gap-2 mb-8">
-            <Music className="w-4 h-4 text-muted-foreground" />
-            <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
-              what i've been listening to
-            </p>
+          <div className="mb-12">
+            <h2 className="text-3xl md:text-5xl font-extrabold leading-tight">
+              my other<span className="text-muted-foreground/40"> interests</span>
+            </h2>
+            <p className="text-sm text-muted-foreground mt-3">some of my other work</p>
           </div>
-          <VinylPlayer />
+
+          {/* Side by side, staggered for an editorial feel */}
+          <div className="grid md:grid-cols-2 gap-10 md:gap-8 items-start">
+            <div className="md:mt-8">
+              <MediaCarousel
+                label="flyers"
+                sublabel="posters & event design"
+                items={flyers}
+                ratio="1 / 1"
+                accent={<Palette className="w-4 h-4 text-muted-foreground" />}
+              />
+            </div>
+            <div className="md:-mt-4">
+              <MediaCarousel
+                label="photos"
+                sublabel="moments through my lens"
+                items={photos}
+                ratio="4 / 3"
+                accent={<Camera className="w-4 h-4 text-muted-foreground" />}
+              />
+            </div>
+          </div>
         </div>
       </div>
     </section>

@@ -168,12 +168,12 @@ const Projects = () => {
     <section id="projects" className="py-20 md:py-32 relative">
       {/* Decorative */}
       <div className="absolute top-24 left-8 md:left-16 text-[10px] text-white/[0.04] font-mono -rotate-90 hidden md:block">
-        PROJECTS — 02
+        PROJECTS — 01
       </div>
 
       <div className="max-w-5xl mx-auto px-6">
         <p className="font-mono text-xs text-muted-foreground tracking-widest uppercase mb-8 fade-up">
-          02 / projects
+          01 / projects
         </p>
 
         <div className="flex items-end justify-between mb-10 fade-up">

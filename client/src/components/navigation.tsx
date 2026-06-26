@@ -3,10 +3,10 @@ import { Menu, X } from "lucide-react";
 
 const navItems = [
   { hash: "home", label: "home" },
-  { hash: "about", label: "about" },
   { hash: "projects", label: "projects" },
   { hash: "experience", label: "experience" },
   { hash: "skills", label: "skills" },
+  { hash: "about", label: "about" },
   { hash: "contact", label: "contact" },
 ];
 

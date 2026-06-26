@@ -1,13 +1,29 @@
-import { GraduationCap, Code, Briefcase, Server, Brain, FlaskConical } from "lucide-react";
+import { GraduationCap, Code, Briefcase, Server, Brain, FlaskConical, Sparkles } from "lucide-react";
 
 const experiences = [
   {
-    title: "UCSC Computer Science B.S.",
-    org: "University of California, Santa Cruz",
-    date: "2023 — 2027",
-    description: "Pursuing a computer science degree. Coursework includes data structures & algorithms, computer architecture, machine learning, and web development.",
+    title: "UCSD Computer Science B.S.",
+    org: "University of California, San Diego",
+    date: "2026 — Expected 2028",
+    description: "",
     icon: GraduationCap,
     tags: ["Computer Science"],
+  },
+  {
+    title: "UCSC Computer Science B.S.",
+    org: "University of California, Santa Cruz",
+    date: "2024 — 2026",
+    description: "Completed two years of my computer science degree before transferring. Coursework included data structures & algorithms, computer architecture, computer systems & C programming, and machine learning.",
+    icon: GraduationCap,
+    tags: ["Computer Science"],
+  },
+  {
+    title: "Software Engineering Intern",
+    org: "Argos",
+    date: "March 2026 — Present",
+    description: "Built a daily AI evaluation pipeline with Temporal, Logfire, and LLM-based judges to automatically assess model responses and post quality reports to Slack. Built end-to-end custom-field management for legal matters with FastAPI endpoints and a React/TypeScript settings interface.",
+    icon: Sparkles,
+    tags: ["Temporal", "FastAPI", "React", "LLM"],
   },
   {
     title: "Frontend Web Developer",
@@ -28,10 +44,10 @@ const experiences = [
   {
     title: "Research Assistant — Logic-LM",
     org: "AIEA Research Lab",
-    date: "January 2025 — March 2026",
-    description: "Working on a large language model to summarize Zoom meetings for the lab.",
+    date: "February 2026 — June 2026",
+    description: "Developing Hybrid Note, a note-taking platform that uses vision-language models to process handwritten notes and integrate them with digital documents.",
     icon: Brain,
-    tags: ["LLM", "NLP", "Research"],
+    tags: ["VLM", "NLP", "Research"],
   },
   {
     title: "Student Researcher",
@@ -47,13 +63,13 @@ const Experience = () => {
   return (
     <section id="experience" className="px-6 py-20 md:py-32 relative">
       <div className="absolute top-32 left-8 md:left-16 text-[10px] text-white/[0.04] font-mono -rotate-90 hidden md:block">
-        EXPERIENCE — 03
+        EXPERIENCE — 02
       </div>
       <div className="absolute bottom-40 right-6 w-[1px] h-20 bg-gradient-to-b from-transparent via-white/10 to-transparent hidden md:block" />
 
       <div className="max-w-5xl mx-auto">
         <p className="font-mono text-xs text-muted-foreground tracking-widest uppercase mb-8 fade-up">
-          03 / experience
+          02 / experience
         </p>
 
         <h2 className="text-4xl md:text-6xl font-extrabold mb-16 leading-tight fade-up">
@@ -81,9 +97,11 @@ const Experience = () => {
                           </p>
                           <h3 className="text-lg font-bold mb-0.5">{exp.title}</h3>
                           <p className="text-xs text-muted-foreground mb-3">{exp.org}</p>
-                          <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-                            {exp.description}
-                          </p>
+                          {exp.description && (
+                            <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+                              {exp.description}
+                            </p>
+                          )}
                           <div className="flex flex-wrap gap-1.5">
                             {exp.tags.map((tag) => (
                               <span

@@ -39,7 +39,7 @@ const Contact = () => {
   };
 
   const contactLinks = [
-    { icon: Mail, label: "email", value: "jwei57@ucsc.edu", href: "mailto:jwei57@ucsc.edu" },
+    { icon: Mail, label: "email", value: "jowei@ucsd.edu", href: "mailto:jowei@ucsd.edu" },
     { icon: Github, label: "github", value: "jolenewei", href: "https://github.com/jolenewei" },
     { icon: Linkedin, label: "linkedin", value: "jolene-wei", href: "https://www.linkedin.com/in/jolene-wei" },
     { icon: MapPin, label: "location", value: "san jose, ca", href: null },

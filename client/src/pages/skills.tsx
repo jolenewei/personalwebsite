@@ -10,17 +10,17 @@ const Skills = () => {
     {
       icon: Database,
       title: "frameworks & libraries",
-      skills: ["React", "Angular", "Node.js", "Express", "MongoDB", "Firebase"],
+      skills: ["React", "Angular", "Node.js", "Express", "FastAPI", "MongoDB", "Firebase", "Chart.js"],
     },
     {
       icon: Layers,
       title: "tools",
-      skills: ["Git", "GitHub", "Docker", "Docker Compose", "PostgreSQL", "Chrome Extension APIs", "Unix/Linux"],
+      skills: ["Git", "GitHub", "Docker", "Docker Compose", "PostgreSQL", "Vite", "Chrome Extension APIs", "Unix/Linux"],
     },
     {
       icon: Cpu,
       title: "ml / other",
-      skills: ["OpenAI API", "scikit-learn", "NumPy"],
+      skills: ["OpenAI API", "LLM-based Evaluation", "Temporal", "Logfire", "scikit-learn", "NumPy"],
     },
   ];
 
@@ -28,12 +28,12 @@ const Skills = () => {
     <section id="skills" className="px-6 py-20 md:py-32 relative">
       <div className="absolute top-32 right-10 w-[1px] h-16 bg-gradient-to-b from-transparent via-white/10 to-transparent hidden md:block" />
       <div className="absolute bottom-20 right-8 md:right-16 text-[10px] text-white/[0.04] font-mono rotate-90 hidden md:block">
-        SKILLS — 04
+        SKILLS — 03
       </div>
 
       <div className="max-w-5xl mx-auto">
         <p className="font-mono text-xs text-muted-foreground tracking-widest uppercase mb-8 fade-up">
-          04 / skills
+          03 / skills
         </p>
 
         <h2 className="text-4xl md:text-6xl font-extrabold mb-12 leading-tight fade-up">

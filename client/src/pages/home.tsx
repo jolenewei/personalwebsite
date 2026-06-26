@@ -124,7 +124,7 @@ const Home = () => {
                   jolene wei
                 </h1>
                 <p className="text-white/50 text-sm md:text-base mt-3 max-w-sm md:ml-10">
-                  computer science student at uc santa cruz — i love building
+                  computer science student at uc san diego — i love building
                   things that make a difference. always open to new opportunities.
                 </p>
 
@@ -138,7 +138,7 @@ const Home = () => {
                     className="flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-4 py-2 text-xs font-medium hover:bg-white hover:text-black transition-all">
                     <Linkedin className="w-3.5 h-3.5" /> linkedin
                   </a>
-                  <a href="mailto:jwei57@ucsc.edu"
+                  <a href="mailto:jowei@ucsd.edu"
                     className="flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-4 py-2 text-xs font-medium hover:bg-white hover:text-black transition-all">
                     <Mail className="w-3.5 h-3.5" /> email
                   </a>

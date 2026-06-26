@@ -21,13 +21,13 @@ function App() {
           <main className="flex-1 relative z-10">
             <Home />
             <div className="w-full h-[1.5px] bg-white/15" />
-            <About />
-            <div className="w-full h-[1.5px] bg-white/15" />
             <Projects />
             <div className="w-full h-[1.5px] bg-white/15" />
             <Experience />
             <div className="w-full h-[1.5px] bg-white/15" />
             <Skills />
+            <div className="w-full h-[1.5px] bg-white/15" />
+            <About />
             <div className="w-full h-[1.5px] bg-white/15" />
             <Contact />
           </main>
