@@ -7,21 +7,21 @@ const projects = [
     description: "Chrome extension that rewrites emails in Gmail using OpenAI with customizable tone and one-click replacement.",
     tags: ["Chrome APIs", "OpenAI API", "JavaScript", "Vite"],
     videoId: "-hqQRXeTL1s",
-    githubLink: "#",
+    githubLink: "https://github.com/jolenewei/chameleon",
   },
   {
     title: "typing test",
     description: "Full-stack typing test with real-time WPM and accuracy tracking, Google login, and saved performance history.",
     tags: ["React", "Express", "MongoDB", "Firebase Auth", "Chart.js"],
     videoId: "i20esF_XM9M",
-    githubLink: "#",
+    githubLink: "https://github.com/jolenewei/typing-test",
   },
   {
     title: "tetris game",
     description: "Playable Tetris clone with piece movement, rotation, line clearing, and live scoring.",
     tags: ["React", "JavaScript", "CSS"],
     videoId: "BfaDWTFXMZw",
-    githubLink: "#",
+    githubLink: "https://github.com/jolenewei/tetris",
   },
   {
     title: "compass goals",
@@ -33,74 +33,71 @@ const projects = [
 ];
 
 const ProjectCard = ({ project, index, isActive }: { project: typeof projects[0]; index: number; isActive: boolean }) => {
-  const [playing, setPlaying] = useState(false);
+  const [manualPlay, setManualPlay] = useState(false);
+  const playing = isActive || manualPlay;
   const thumbnail = `https://img.youtube.com/vi/${project.videoId}/hqdefault.jpg`;
+  const embed = `https://www.youtube-nocookie.com/embed/${project.videoId}?autoplay=1&mute=1&loop=1&playlist=${project.videoId}&controls=0&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&disablekb=1`;
 
   return (
     <div
-      className={`project-card w-[340px] md:w-[420px] glass-card overflow-hidden ${
+      className={`project-card relative w-[460px] md:w-[680px] max-w-[88vw] ${
         isActive ? "active" : ""
       }`}
     >
-      {/* Video / Thumbnail area */}
-      <div className="bg-neutral-900 h-[180px] md:h-[220px] relative overflow-hidden">
-        {playing ? (
-          <iframe
-            src={`https://www.youtube.com/embed/${project.videoId}?autoplay=1&mute=1&rel=0`}
-            className="absolute inset-0 w-full h-full"
-            allow="autoplay; encrypted-media"
-            allowFullScreen
-            title={project.title}
-          />
-        ) : (
-          <>
-            <img
-              src={thumbnail}
-              alt={project.title}
-              className="w-full h-full object-cover"
-            />
-            {/* Play button overlay */}
-            <button
-              onClick={() => setPlaying(true)}
-              className="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/40 transition-all group"
-            >
-              <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:bg-white/30 group-hover:scale-110 transition-all">
-                <Play className="w-5 h-5 ml-0.5 text-white" fill="white" />
-              </div>
-            </button>
-          </>
-        )}
-
-        <span className="font-mono text-5xl font-bold opacity-[0.06] absolute top-3 right-4 pointer-events-none">
-          {String(index + 1).padStart(2, "0")}
-        </span>
-
-        {/* Action buttons */}
-        <div className="absolute bottom-3 right-3 flex gap-2 z-10">
-          <a
-            href={`https://www.youtube.com/watch?v=${project.videoId}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-2 bg-black/50 backdrop-blur-sm rounded-full hover:bg-white hover:text-black transition-all"
-          >
-            <ExternalLink className="w-3.5 h-3.5" />
-          </a>
-          <a
-            href={project.githubLink}
-            className="p-2 bg-black/50 backdrop-blur-sm rounded-full hover:bg-white hover:text-black transition-all"
-          >
-            <Github className="w-3.5 h-3.5" />
-          </a>
+      {/* Laptop */}
+      <div className="flex flex-col items-center">
+        {/* Lid / screen */}
+        <div className="w-[92%] bg-black rounded-t-2xl border-[3px] border-neutral-800 border-b-0 px-3 pt-4 pb-3 shadow-2xl shadow-black/70">
+          {/* Webcam */}
+          <div className="w-1.5 h-1.5 rounded-full bg-neutral-700 mx-auto mb-2.5" />
+          <div className="rounded-lg overflow-hidden bg-black aspect-video relative">
+            {playing ? (
+              <>
+                <iframe
+                  src={embed}
+                  className="absolute inset-0 w-full h-full"
+                  allow="autoplay; encrypted-media"
+                  allowFullScreen
+                  title={project.title}
+                />
+                {/* Blocks hover so YouTube's title/channel chrome stays hidden */}
+                <div className="absolute inset-0 z-10" />
+              </>
+            ) : (
+              <>
+                <img
+                  src={thumbnail}
+                  alt={project.title}
+                  loading="lazy"
+                  className="w-full h-full object-cover"
+                />
+                <button
+                  onClick={() => setManualPlay(true)}
+                  className="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/40 transition-all group"
+                >
+                  <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:bg-white/30 group-hover:scale-110 transition-all">
+                    <Play className="w-5 h-5 ml-0.5 text-white" fill="white" />
+                  </div>
+                </button>
+              </>
+            )}
+            {/* Screen gloss */}
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent" />
+          </div>
+        </div>
+        {/* Hinge / base */}
+        <div className="relative w-full h-3.5 bg-gradient-to-b from-neutral-700 to-black rounded-b-xl shadow-lg shadow-black/60">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-1.5 rounded-b-lg bg-black/60" />
         </div>
       </div>
 
       {/* Info */}
-      <div className="p-5">
-        <h3 className="text-lg font-bold mb-2">{project.title}</h3>
-        <p className="text-muted-foreground text-xs leading-relaxed mb-4">
+      <div className="pt-7 text-center px-4">
+        <h3 className="text-xl md:text-2xl font-bold mb-2.5">{project.title}</h3>
+        <p className="text-muted-foreground text-sm leading-relaxed mb-4 max-w-md mx-auto">
           {project.description}
         </p>
-        <div className="flex flex-wrap gap-1.5">
+        <div className="flex flex-wrap gap-1.5 justify-center mb-5">
           {project.tags.map((tag, tagIndex) => (
             <span
               key={tagIndex}
@@ -109,6 +106,26 @@ const ProjectCard = ({ project, index, isActive }: { project: typeof projects[0]
               {tag}
             </span>
           ))}
+        </div>
+        <div className="flex gap-3 justify-center">
+          <a
+            href={`https://www.youtube.com/watch?v=${project.videoId}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold bg-white text-black hover:bg-white/85 shadow-lg shadow-white/5 transition-all"
+          >
+            <ExternalLink className="w-4 h-4" /> demo
+          </a>
+          {project.githubLink !== "#" && (
+            <a
+              href={project.githubLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold bg-white/[0.07] border border-white/15 text-white hover:bg-white/15 transition-all"
+            >
+              <Github className="w-4 h-4" /> code
+            </a>
+          )}
         </div>
       </div>
     </div>
@@ -205,7 +222,7 @@ const Projects = () => {
       <div
         ref={carouselRef}
         onScroll={handleScroll}
-        className="project-carousel flex gap-5 px-[calc(50vw-180px)] md:px-[calc(50vw-220px)] pb-4 fade-up fade-up-delay-1"
+        className="project-carousel flex gap-8 px-[calc(50vw-230px)] md:px-[calc(50vw-340px)] pb-4 fade-up fade-up-delay-1"
       >
         {projects.map((project, index) => (
           <ProjectCard
